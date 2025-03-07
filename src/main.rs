@@ -1,32 +1,20 @@
 #[macro_use]
 extern crate log;
 
-use std::ops;
-
-struct Vec3 {
-    x: f64,
-    y: f64,
-    z: f64,
-}
-
-impl ops::Add for Vec3 {
-    type Output = Self;
-
-    fn add(self, other: Self) -> Self {
-        Self {
-            x: self.x + other.x,
-            y: self.y + other.y,
-            z: self.z + other.z,
-        }
-    }
-}
+pub mod vec3;
+use vec3::{cross, Vec3};
 
 fn main() {
     env_logger::init();
     let image_width = 256;
     let image_height = 256;
 
-    print!("P3\n{} {}\n255\n", image_width, image_height);
+    let test = Vec3::new(1.0, 2.0, 2.0);
+    let test2 = Vec3::new(2.0, 3.0, 7.0);
+
+    //TODO: make it delete ../output/image.ppm then write to it line by line
+
+    /*print!("P3\n{} {}\n255\n", image_width, image_height);
 
     for i in 0..image_height {
         for j in 0..image_width {
@@ -44,5 +32,8 @@ fn main() {
             info!("Scanlines remaining: {}", 255 - i);
         }
     }
-    info!("Complete");
+    info!("Complete");*/
+
+    println!("|(1,2,2)| = {}", { test.length() });
+    println!("(1,2,2)x(2,3,7) = {:?}", { cross(test, test2) });
 }
